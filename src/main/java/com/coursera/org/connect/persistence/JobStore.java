@@ -12,4 +12,6 @@ public interface JobStore {
     Job getJob(Integer jobId);
 
     List<Job> getJobsByRecruiter(Integer recruiterId);
+
+    List<Job> getJobsByLearner(String userEmailId);
 }

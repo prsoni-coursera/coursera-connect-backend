@@ -2,7 +2,7 @@ package com.coursera.org.connect.controllers;
 
 import com.coursera.org.connect.managers.JobsManager;
 import com.coursera.org.connect.models.Job;
-import com.coursera.org.connect.models.request.JobRequest;
+import com.coursera.org.connect.models.request.JobAddRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class JobController {
     }
 
     @PostMapping("/job/addJob")
-    public ResponseEntity<String> addJob(@RequestBody JobRequest request) {
+    public ResponseEntity<String> addJob(@RequestBody JobAddRequest request) {
         try {
             Integer jobId = jobsManager.addJob(request);
             return ResponseEntity.ok("Job added successfully with jobId: " + jobId);
@@ -32,12 +32,22 @@ public class JobController {
         }
     }
 
-    @GetMapping("/job/{recruiterId}")
+    @GetMapping("/job/recruiter/{recruiterId}")
     public ResponseEntity<List<Job>> getJobsByRecruiterId(@PathVariable Integer recruiterId) {
         try {
             return ResponseEntity.ok(jobsManager.getJobsByRecruiterId(recruiterId));
         } catch (Exception e) {
             logger.error("Error getting jobs by recruiterId", e);
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @GetMapping("/job/learner/{userEmailId}")
+    public ResponseEntity<List<Job>> getJob(@PathVariable String userEmailId) {
+        try {
+            return ResponseEntity.ok(jobsManager.getJobsByLearner(userEmailId));
+        } catch (Exception e) {
+            logger.error("Error getting job", e);
             return ResponseEntity.badRequest().body(null);
         }
     }

@@ -1,7 +1,7 @@
 package com.coursera.org.connect.managers;
 
 import com.coursera.org.connect.models.Job;
-import com.coursera.org.connect.models.request.JobRequest;
+import com.coursera.org.connect.models.request.JobAddRequest;
 import com.coursera.org.connect.persistence.JobStore;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class JobsManagerImpl implements JobsManager {
     }
 
     @Override
-    public Integer addJob(JobRequest request) {
+    public Integer addJob(JobAddRequest request) {
         return jobStore.addJob(request.getJobName(),
                 request.getJobDescription(),
                 request.getRecruiterId(),
@@ -25,5 +25,10 @@ public class JobsManagerImpl implements JobsManager {
     @Override
     public List<Job> getJobsByRecruiterId(Integer recruiterId) {
         return jobStore.getJobsByRecruiter(recruiterId);
+    }
+
+    @Override
+    public List<Job> getJobsByLearner(String userEmailId) {
+        return jobStore.getJobsByLearner(userEmailId);
     }
 }

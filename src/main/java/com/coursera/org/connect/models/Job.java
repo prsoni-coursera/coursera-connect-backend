@@ -13,8 +13,6 @@ public class Job implements Serializable {
     Integer jobId;
     String jobName;
     String jobDescription;
-    String jobLocation;
-    String jobType;
     Integer recruiterId;
     List<SkillScore> skillScoreList;
 }

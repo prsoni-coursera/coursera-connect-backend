@@ -6,11 +6,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class JobRequest {
+public class JobAddRequest {
     String jobName;
     String jobDescription;
-    String jobLocation;
-    String jobType;
     Integer recruiterId;
     List<SkillScore> skillScoreList;
 }
